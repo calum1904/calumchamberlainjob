@@ -1,0 +1,71 @@
+    <div class = "collapse" id="postajob">
+        <div class="card card-body">
+                    <form action="/api/jobs" method="POST">
+                        <div class = "form-row">
+                            <div class = "form-group col-sm-6">
+                                <label for = "title">Job Title</label>
+                                <input class="form-control" type="text" name="title" />
+                            </div>
+
+                            <div class = "form-group col-sm-6">
+                                <label for = "category">Category</label>
+                                <select class="form-control" type="text" name="category">
+                                    <option> Arts & Entertainment </option>
+                                    <option> Accouting </option>
+                                    <option> Beauty & Wellness </option>
+                                    <option> Engineering </option>
+                                    <option> Education </option>
+                                    <option> Health </option>
+                                    <option> Retail </option>
+                                    <option> Sports </option>
+                                    <option> Technology </option>
+                                    <option> Veterinary </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class = "form-row">    
+                            <div class = "form-group col-sm-6">
+                                <label for = "location">Location</label>
+                                <input class="form-control" type="text" name="location"/>
+                            </div>
+                             <div class = "form-group col-sm-6">
+                                <label for = "company">Company Name</label>
+                                <input class="form-control" type="text" name="company"/>
+                            </div>
+                        </div>
+
+                        <div class = "form-row">
+                            <div class = "form-group col-sm-12">
+                                <label for = "description">Job Description</label>
+                                <textarea rows = "6" class="form-control" type="text" name="description"></textarea>
+                            </div>
+                        </div>
+
+                    <div class = "form-row">
+                        <div class = "form-group col-sm-12">
+                            <label for = "apply">How to apply</label>
+                            <input class="form-control" class="form-control" type="text" name="apply"/>
+                        </div>
+                    </div>
+
+                       
+                    <div class = "form-row">
+                        <div class = "form-group col-sm-6">
+                            <label for = "website">Website</label>
+                            <input class="form-control" type="url" name="website" placeholder="http://..." />
+                        </div>
+
+                        <div class = "form-group col-sm-6">
+                            <label for = "email">Email Address</label>
+                            <input class="form-control" type="text" name="email"/>
+                        </div>
+                    </div>
+
+                        <div class = "form-group row">
+                        <button type="submit" class="btn btn-success">Post Job</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>

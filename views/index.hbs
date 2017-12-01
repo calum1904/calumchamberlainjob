@@ -1,0 +1,35 @@
+<body onload="getReq()">
+
+    <div class = "container">
+        <div class = "top">
+            <h1 class="display-3"> 
+                {{#if username}}
+                     Welcome {{{username.firstName}}} {{{username.lastName}}}!
+                    {{else}}
+                    Welcome! 
+                {{/if}}</h1>
+            <p class="lead">Search for your next job here with loads of jobs to choose from.</p>
+            <hr class="my-4">
+
+            <p class="lead">
+                <button href ="#post" class="btn btn-outline-success btn-lg" type = "btton" data-toggle = "collapse" data-target = "#postajob" aria-expanded = "false" aroa-controls = "collapse">Post A Job</button>
+            </p>
+        </div>
+            
+                {{> logIn}}
+                {{> signUp}}
+                {{> postJob}}
+
+                
+
+		<h1 id = showedJobs>Recent Job Listings</h1>
+
+
+        <div class="recent" id="accordion" role="tablist">
+
+        </div>
+
+            <div id = "category">
+               {{> categories}}
+
+            </div>

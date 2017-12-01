@@ -1,0 +1,30 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+				<div class="container">
+					 <a class="navbar-brand" href="/">Job Board</a>
+ 					 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    				<span class="navbar-toggler-icon"></span>
+  					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active">
+								<a class = "nav-link" href=/></a>
+							</li>
+						</ul>
+						<form class="form-inline my-2 my-lg-0" role="form" method="post" action="">
+							<input type="hidden" name="" value="">
+							<input class="form-control mr-sm-2" type="text" name="" placeholder="Seach for job listings..." aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+						</form>
+						<ul class="navbar-nav navbar-right ">
+
+							{{#if username}}
+								<li class = "user"><a href = "api/logout" class="">Logout {{{username.firstName}}}</a></li>
+							{{else}}
+								<li class = "user"><a href="#" data-toggle="modal" data-target="#logIn">Log In</a></li>
+								<li class = "user"><a href="#" data-toggle="modal" data-target="#signUp">Sign Up</a></li>
+							{{/if}}
+							
+						</ul>
+					</div>
+				</div>
+			</nav>
