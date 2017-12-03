@@ -6,7 +6,7 @@ const Jobs = require('../models/jobs')
 const User = require('../models/user')
 
 
-
+//----------------------Get Home Page----------------------//
 router.get('/', function(req, res, next){
 	//res.redirect('/jobs');
 	console.log(req.user);
@@ -14,13 +14,15 @@ router.get('/', function(req, res, next){
 });
 
 
-//send the last 5 jobs to the index
+//----------------------Send Recent jobs----------------------//
 router.get('/jobs', function(req, res, next){
 	Jobs.find().sort({_id:-1}).limit(10).then(function(catJobs){
 		res.json(catJobs)
 	});
 });
 
+
+//----------------------Send Category jobs----------------------//
 router.get('/jobs:cat', function(req, res, next){
 	Jobs.find({category: req.params.cat }).sort({_id:-1}).limit(10).then(function(catJobs){
 		console.log({category: req.params.cat })
@@ -28,6 +30,16 @@ router.get('/jobs:cat', function(req, res, next){
 	});
 });
 
+
+//----------------------Get users jobs----------------------//
+router.get('/profile', function(req, res, next){
+	Jobs.find({userid: req.user._id }).sort({_id:-1}).limit(10).then(function(userJobs){
+		res.json(userJobs)
+	});
+});
+
+
+//----------------------Login / Signup / Logout----------------------//
 router.post('/login', passport.authenticate('login', {
 	successRedirect : '/#yay',
 	failureRedirect : '/',
@@ -41,15 +53,13 @@ router.post('/signup', passport.authenticate('signup', {
 	failureFlash : true
 	})
 );
-
-
 router.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
     }
 );
 
-
+//----------------------User list----------------------//
 router.get('/users', function(req, res, next){
 	console.log("get users");
 	User.find({}).then(function(users){
@@ -58,7 +68,7 @@ router.get('/users', function(req, res, next){
 });
 
 
-//Add a job to the database
+//----------------------Add job to collection----------------------//
 router.post('/jobs', function (req, res, next){
 	var item = {
 		'title': req.body.title,
@@ -77,6 +87,7 @@ router.post('/jobs', function (req, res, next){
 	res.redirect('/');
 });
 
+//----------------------Add user to collection----------------------//
 router.post('/users', function(req, res, next){
 	console.log("get users");
 	var user = {
@@ -91,8 +102,8 @@ router.post('/users', function(req, res, next){
 	res.redirect('/')
 });
 
-//update a job in the database
-router.put('/jobs/:id', function(req, res, next){
+//----------------------Update job in collection----------------------//
+router.put('/jobs:id', function(req, res, next){
 	Jobs.findByIdAndUpdate({_id: req.params.id},req.body).then(function(){
 		Jobs.findOne({_id: req.params.id}).then(function(job){
 			res.send(job);
@@ -100,15 +111,17 @@ router.put('/jobs/:id', function(req, res, next){
 	});
 });
 
-//delete a job from the database
+//----------------------Delete job from collection----------------------//
 router.delete('/jobs/:id', function(req, res, next){
 	Jobs.findByIdAndRemove({_id: req.params.id}).then(function(job){
+		console.log(job);
 		res.send(job);
 	});
 });
 
-function isLoggedIn(req, res, next) {
 
+
+function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();

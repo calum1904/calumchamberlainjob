@@ -10,7 +10,7 @@
                 {{/if}}</h1>
             <p class="lead">Search for your next job here with loads of jobs to choose from.</p>
             <hr class="my-4">
-
+            <div id = "postajobdiv">
             <p class="lead">
                 <button href ="#post" class="btn btn-outline-success btn-lg" type = "btton" data-toggle = "collapse" data-target = "#postajob" aria-expanded = "false" aroa-controls = "collapse">Post A Job</button>
             </p>
@@ -19,10 +19,15 @@
                 {{> logIn}}
                 {{> signUp}}
                 {{> postJob}}
+                
+                <div id="deletejob">
+                </div>
+            </div>
 
                 
 
-		<h1 id = showedJobs>Recent Job Listings</h1>
+		<h1 id = showedJobs> Recent Job Listings </h1>
+        <p id = "thanks" class="lead"></p>
 
 
         <div class="recent" id="accordion" role="tablist">
