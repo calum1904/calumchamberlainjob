@@ -66,7 +66,7 @@ app.use(function(err, req, res, next){
 
 
 //listen for requests
-app.listen(process.env.port || 4000, function(){
+app.listen(process.env.PORT || 4000, function(){
 	console.log('port is now listening');
 	console.log('The magic happens on port 4000');
 });
