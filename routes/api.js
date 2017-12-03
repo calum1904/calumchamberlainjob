@@ -68,7 +68,7 @@ router.post('/jobs', function (req, res, next){
 		'apply': req.body.apply,
 		'company': req.body.company,
 		'website': req.body.website,
-		'email': req.body.email
+		'userid': req.user._id
 	};
 	console.log(item);
 	Jobs.create(item).then(function(err, res){
@@ -89,7 +89,7 @@ router.post('/users', function(req, res, next){
 		console.log('New user added');
 		}).catch(next);
 	res.redirect('/')
-}); 
+});
 
 //update a job in the database
 router.put('/jobs/:id', function(req, res, next){
@@ -109,7 +109,7 @@ router.delete('/jobs/:id', function(req, res, next){
 
 function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
+    // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
 

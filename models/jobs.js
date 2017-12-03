@@ -32,10 +32,10 @@ const JobsSchema = new Schema({
 		type: String,
 		required: [false]
 	},
-	email:{
-		type: String,
-		required: [false]
-	}
+    userid:{
+        type:String,
+        required: [true]
+    }
 
 });
 
