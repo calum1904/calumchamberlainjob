@@ -14,14 +14,16 @@
             <p class="lead">
                 <button href ="#post" class="btn btn-outline-success btn-lg" type = "btton" data-toggle = "collapse" data-target = "#postajob" aria-expanded = "false" aroa-controls = "collapse">Post A Job</button>
             </p>
-        </div>
+            </div>
             
+            <div id = "partials">
                 {{> logIn}}
                 {{> signUp}}
                 {{> postJob}}
-                
+            </div>
                 <div id="deletejob">
                 </div>
+                <div id = "usermodels"></div>
             </div>
 
                 
@@ -31,10 +33,11 @@
 
 
         <div class="recent" id="accordion" role="tablist">
+        </div>
 
+        <div id = "profile">
         </div>
 
             <div id = "category">
                {{> categories}}
-
             </div>

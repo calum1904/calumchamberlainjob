@@ -35,6 +35,10 @@ const JobsSchema = new Schema({
     userid:{
         type:String,
         required: [true]
+    },
+    createdOn:{
+        type:String,
+        required: [true]
     }
 
 });

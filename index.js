@@ -8,7 +8,9 @@ const passport = require('passport');
 const logger = require('morgan');
 const session = require('express-session');
 const flash    = require('connect-flash');
+const moment = require('moment');
 const routes = require('./routes/api');
+
 
 //Set up express application
 const app = express();

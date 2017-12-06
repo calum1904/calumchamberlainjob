@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+const moment = require('moment');
 
 const Jobs = require('../models/jobs')
 const User = require('../models/user')
@@ -9,7 +10,6 @@ const User = require('../models/user')
 //----------------------Get Home Page----------------------//
 router.get('/', function(req, res, next){
 	//res.redirect('/jobs');
-	console.log(req.user);
 	res.render('index',{ title: 'Job Board', username: req.user});
 });
 
@@ -60,10 +60,11 @@ router.get('/logout', function(req, res) {
 );
 
 //----------------------User list----------------------//
-router.get('/users', function(req, res, next){
-	console.log("get users");
-	User.find({}).then(function(users){
-		res.json(users);
+router.get('/user', function(req, res, next){
+	console.log("hit");
+	User.find({_id: req.user._id }).then(function(user){
+		console.log(user);
+		res.json(user);
 	});
 });
 
@@ -78,7 +79,8 @@ router.post('/jobs', function (req, res, next){
 		'apply': req.body.apply,
 		'company': req.body.company,
 		'website': req.body.website,
-		'userid': req.user._id
+		'userid': req.user._id,
+		'createdOn': moment().format("MMM Do YY")
 	};
 	console.log(item);
 	Jobs.create(item).then(function(err, res){
@@ -103,19 +105,47 @@ router.post('/users', function(req, res, next){
 });
 
 //----------------------Update job in collection----------------------//
-router.put('/jobs:id', function(req, res, next){
-	Jobs.findByIdAndUpdate({_id: req.params.id},req.body).then(function(){
-		Jobs.findOne({_id: req.params.id}).then(function(job){
-			res.send(job);
-		});
+router.put('/jobs/:id', function(req, res, next){
+	Jobs.findById(req.params.id).then(function(job){
+			job.title = req.body.title || job.title;
+			job.category = req.body.category || job.category;
+			job.location = req.body.location || job.location;
+			job.description = req.body.description || job.description;
+			job.apply = req.body.apply || job.apply;
+			job.company = req.body.company || job.company;
+			job.website = req.body.website || job.website;
+		
+			job.save((job)).then(function(){
+            res.status(200).send(job);
+        	});
+
+		})
 	});
-});
+
+//----------------------Update User email in collection----------------------//
+router.put('/user/:id', function(req, res, next){
+	User.findById(req.params.id).then(function(user){
+			user.email = req.body.email || user.email;
+			user.save((user)).then(function(){
+            res.status(200).send(user);
+        	});
+
+		})
+	});
 
 //----------------------Delete job from collection----------------------//
 router.delete('/jobs/:id', function(req, res, next){
 	Jobs.findByIdAndRemove({_id: req.params.id}).then(function(job){
 		console.log(job);
 		res.send(job);
+	});
+});
+
+//----------------------Delete user from collection----------------------//
+router.delete('/user/:id', function(req, res, next){
+	User.findByIdAndRemove({_id: req.params.id}).then(function(user){
+		console.log(user);
+		res.send(user);
 	});
 });
 

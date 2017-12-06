@@ -77,21 +77,15 @@ passport.use('login', new LocalStrategy({
         // we are checking to see if the user trying to login already exists
         User.findOne({ 'email' :  email }).then( function(user) {
             // if there are any errors, return the error before anything else
-            console.log("didnt make it");
-            console.log(user);
             // if no user is found, return the message
             if (!user.email){
-            	console.log("no user");
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
 				};
-                console.log("first if done")
             // if the user is found but the password is wrong
             if (!user.validPassword(password)){
             	console.log("wrong pass");
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
             };
-
-            console.log("got user returning....")
             // all is well, return successful user
             return done(null, user);
         });

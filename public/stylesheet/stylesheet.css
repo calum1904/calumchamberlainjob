@@ -83,6 +83,10 @@ body {
     
 }
 
+.verticalLine {
+    border-left: solid 1.5px rgba(16,16,16,0.10)
+}
+
 footer {
     background-color: #f8f9fa !important;
     position: absolute;
