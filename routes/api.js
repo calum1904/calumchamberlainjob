@@ -22,6 +22,16 @@ router.get('/jobs', function(req, res, next){
 });
 
 
+//----------------------Send Random job(android)----------------------//
+router.get('/jobs/random', function(req, res, next){
+	Jobs.count().exec(function (err, count) {
+		var random = Math.floor(Math.random() * count)
+		Jobs.findOne().skip(random).then(function(catJobs){
+		res.json(catJobs)
+	});
+});
+
+
 //----------------------Send Category jobs----------------------//
 router.get('/jobs:cat', function(req, res, next){
 	Jobs.find({category: req.params.cat }).sort({_id:-1}).limit(10).then(function(catJobs){
