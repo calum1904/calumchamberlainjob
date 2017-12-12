@@ -28,6 +28,7 @@ router.get('/jobs/random', function(req, res, next){
 		var random = Math.floor(Math.random() * count)
 		Jobs.findOne().skip(random).then(function(catJobs){
 		res.json(catJobs)
+		});
 	});
 });
 
