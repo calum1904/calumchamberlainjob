@@ -8,6 +8,7 @@ function getReq() {
 		url: '/jobs',
 		contentType: 'application/json',
 		success: function(res){
+			var count = 0;
 			$.each(res, function(index, item){
 				var color = ['info', 'success', 'primary'];
 				var html = '';
