@@ -9,13 +9,14 @@ function getReq() {
 		contentType: 'application/json',
 		success: function(res){
 			$.each(res, function(index, item){
+				var color = ['info', 'success', 'primary'];
 				var html = '';
 				//add all the code to a html var to make the js look cleaner than one line
 				html+='<div class = "card">';
 				html+='<div class="card-header" role="tab" id="'+item._id+'job">';
 				html+='<h5 class = "mb-0">';
 				html+='<a data-toggle="collapse" href="#collapse'+item._id+'" aria-expanded="true" aria-controls="collapse'+item._id+'">';
-				html+=item.title + ' in ' + item.location + '<span class ="float-right"> ad by <span class = "alert-link">'+ item.company + '</span> <span class="badge badge-info">'+item.createdOn+'</span> </span>';
+				html+=item.title + ' in ' + item.location + '<span class ="float-right"> ad by <span class = "alert-link">'+ item.company + '</span> <span class="badge badge-'+color[count]+'">'+item.createdOn+'</span> </span>';
 				html+='</a> </h5> </div>';
 				html+='<div id="collapse'+item._id+'" class="collapse" role="tabpanel" aria-labelledby="'+item._id+'job" data-parent="#accordion">';
 				html+='<div class="card-body">';
@@ -26,8 +27,12 @@ function getReq() {
 				html+='<div class = "col-sm-6"><br> Website: <a href="'+item.website+'">'+item.website+'</a> </div> </div> </div> </div> </div>';
 
 				$('#accordion').append(html);
-				//$('#accordion').append('<h3 id='+item.title +'><a href="#">' + item._id + ' </a></h3>');
-			});
+				if(count == 2){
+					count = 0;
+				  }else{
+					count+=1;
+				  }			
+				});
 		}
 	});
 };
@@ -147,10 +152,9 @@ function userJobs() {
                 editModel+='<div class = "form-row"><div class = "form-group col-sm-12"><label for = "description">Job Description</label><textarea rows = "6" class="form-control" type="text" id="description'+item._id+'" name="description"></textarea></div>';
                 editModel+='</div><div class = "form-row"><div class = "form-group col-sm-6"><label for = "apply">How to apply</label><input class="form-control" class="form-control" type="text" id="apply'+item._id+'" name="apply"/></div>';
                 editModel+='<div class = "form-group col-sm-6"><label for = "website">Website</label><input class="form-control" type="url" id="website'+item._id+'" name="website" placeholder="http://..." />'; 
-				editModel+='<span onclick = editJob("'+item._id+'") type="button" class="btn btn-primary">Delete</span></form></div></div>';
+				editModel+='</div></div>';
 				editModel+= '</div><div class="modal-footer">';
-				editModel+= '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-				editModel+= '';
+				editModel+= '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><span onclick = editJob("'+item._id+'") type="button" class="btn btn-primary">Edit</span></form>';
 				editModel+= '</div></div></div></div>';
 				$('#editdelete'+item._id+'').append(editModel);
 
